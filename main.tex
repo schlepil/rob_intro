@@ -160,6 +160,49 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The control theoretic perspective}
+\begin{frame}{Control theory - Intro}
+A robot from a control theoretic perspective looks like this:
+\begin{align*}
+    \xd = f(\x) + g_{\uv}(\x, \uv) + g_{\omega_\x}(\x, \omega_\x)
+    \y = h(\x) + g_{\omega_\y}(\omega_\y)
+\end{align*}
+\only<1->{
+    \begin{columns}
+    \begin{column}{0.5\linewidth}
+        $\x$ : robot state\\
+        $\y$ : ''observable´´ state
+    \end{column}
+    \begin{column}{0.5\linewidth}
+        $f,g$ : system and input dynamics
+        $\uv$ : control input
+    \end{column}
+    \end{columns}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Control theory - Goal}
+\only<1>{
+Control theory seeks to generate a control signal $\uv(t)$ such that the state evolves in a desired way.
+}
+\only<2->{
+\begin{center}
+    {\large Centrifugal governor}\\
+    Keeping steam engines at constant speed [James Watts 1788]
+    \def\svgwidth{\linewidth}
+    \input{reg.pdf_tex}
+    \only<3>{
+    \begin{minipage}{0.49\linewidth}
+        opening angle depends on current speed
+    \end{minipage}
+    \begin{minipage}{0.49\linewidth}
+        negative feedback between opening angle and 
+    \end{minipage}
+    }
+\end{center}
+}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{The industrial perspective}
 \begin{frame}{The industrial perspective}
