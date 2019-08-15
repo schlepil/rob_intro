@@ -91,9 +91,6 @@
 \let\epsilon\varepsilon
 \let\emptyset\varnothing
 
-
-\graphicspath{{./}{./img/}{./img/pdf_tex/}}
-
 \usepackage{makecell}
 
 %\usepackage{enumitem}
@@ -120,6 +117,11 @@
 \newcommand{\tfblue}[1]{\textcolor{blue}{\textbf{#1}}}
 
 \date{\today} % Date, can be changed to a custom date
+
+\graphicspath{{./figures/}}
+\makeatletter
+\def\input@path{{./figures/}}
+\makeatother
 
 \begin{document}
 \begin{frame}
@@ -153,231 +155,100 @@
     \end{itemize}
 \end{frame}
 
-\section{The}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The historical perspective}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{The industrial perspective}
 \begin{frame}{The industrial perspective}
 \begin{center}
-    
+    \Large{\textcolor{blue}{Three main applications}}
+    \def\svgwidth{\linewidth}
+    \input{industrial_robots1.pdf_tex}
 \end{center}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Curriculum Vit\ae ~ 1/2}
-    \bgroup
-    \def\arraystretch{2.5}
-    %\begin{center}
-    \begin{tabular}{c|l}
-         2007 & \makecell[l]{\tblue{Abitur (Bac) avec focalisation math\'ematique/physique} \\ \loc{Christoph Scheiner Gymnasium, Ingolstadt, Allemagne} \\ \results{Mention tr\`es bien} }  \\ \hline
-         2007-11 & \makecell[l]{\tblue{Formation en alternance g\'enie m\'ecanique et m\'ecanicien} \\ \loc{TH N\"urnberg et Schaeffler AG, N\"uremberg, Allemagne} \\ \results{Mention tr\`es bien, 2$^e$/150} } \\ \hline
-         2011-13 & \makecell[l]{\tblue{Ing\'enieur R{\&}D chez Schaeffler AG} \\ \loc{Simulation et optimisation num\'erique} \\ \loc{Schaeffler AG, Herzogenaurach, Allemagne}} \\ \hline
-         2013-2015 & \makecell[l]{\tblue{Master syst\`emes avanc\'es et robotique} \\ \loc{Univ. Pierre et Marie Curie, Paris, France} \\ \results{Mention tr\`es bien, 2$^e$/40} }
-    \end{tabular}
-    %\end{center}
-    \egroup
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-    \frametitle{Curriculum Vit\ae ~ 2/2}
-    \begin{minipage}{\linewidth}
-    \bgroup
-    \def\arraystretch{2.5}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Robotic arm}
     \begin{center}
-    \begin{tabular}{c|l}
-        2015-18 & \makecell[l]{\tblue{Th\`ese en Robotique} \\ \loc{\textit{Contributions to robotic control design}}\\\loc{\textit{under formal stability and safety constraints}} \\ 
-        \loc{Vincent PADOIS et Nicolas PERRIN}\\
-        \loc{ISIR-SORBONNE UNIVERSIT\'E, Paris, France}} \\ \hline
-        2018-19 & \makecell[l]{\tblue{Attach\'e temporaire d'enseignement et de recherche} \\ \loc{Enseignements divers en informatique, \'electronique}\\\loc{et m\'echanique} \\ \loc{ISIR-SORBONNE UNIVERSIT\'E, Paris, France} }
-    \end{tabular}
-    \end{center}
-    \egroup
-    \end{minipage}
-    \vspace*{\fill}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Enseignement}
-
-\begin{frame}
-\frametitle{Enseignement}
-
-\begin{columns}
-\begin{column}{0.49\linewidth}
-\bgroup
-\def\arraystretch{1.5}
-\begin{tabular}{|c|c|}
-    \hline
-     2015-18 & Moniteur - 3x64h  \\ \hline
-     2018-19 & ATER - 192h \\ \hline
-\end{tabular}
-\egroup
-\vspace{10pt}
-\begin{itemize}
-    \item 24h~CM,~130h~TD,~167h~TP
-    \item 80h~Projet
-    \item 335h Licence
-    \item 66h Master
-\end{itemize}
-
-\end{column}
-
-\begin{column}{0.02\linewidth}
-\end{column}
-
-\begin{column}{0.49\linewidth}
-{\centering Liste des UEs incomplets}
-\begin{itemize}
-    \item Programmation scientifique et simulation physique (Python-M1)
-    \item Programmation en langage objet (\CC-M1)
-    \item Programmation pour le calcul scientifique (Fortran-L2)
-    \item Projet Romarin (L2)
-\end{itemize}
-\end{column}
-\end{columns}
-
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-    \frametitle{Enseignement - Projet Romarin}
-    \vspace{-10pt}
-    \begin{center}
-    \textbf{\textbullet Apprentissage par projet \hspace{20pt} \textbullet Projet pluridisciplinaire} \\
-    \bigskip
-    
-    \includegraphics[width=1.\linewidth]{romarin4.png}
-    \end{center}
-   
-    
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Recherche}
-
-\begin{frame}
-    \frametitle{Th\'ematiques de recherche}
-    \vspace{-6pt}
-    \begin{center}
-        {\large \textbf{Obtenir des garanties formelles pour la contr\^ole}}
-    \end{center}
-    
-    \begin{center}
-    \bgroup
-    \def\arraystretch{2.5}
-    \begin{tabular}{c|c}
-        \textbf{Objectif} & \textbf{M\'ethode} \\ \hline
-         \only<1>{\makecell{Synth\`ese automatique\\de loi de contr\^ole}}
-         \only<2>{\tfblue{\makecell{Synth\`ese automatique\\de loi de contr\^ole}}} & \only<1>{\makecell{Robot + T\^ache\\$\mapsto$ Automates temporis\'es}} \only<2>{\tfblue{\makecell{Robot + T\^ache\\$\mapsto$ Automates temporis\'es}}} \\ \hline
-         Stabilit\'e des syst\`emes & \makecell{Contr\^ole optimal et\\optimisation convexe} \\ \hline
-         \only<1>{\makecell{Apprentissage\\par d\'emonstration}}
-         \only<2>{\tfblue{ \makecell{Apprentissage\\par d\'emonstration} } }& 
-         \only<1>{\makecell{Couplage des diff\'eomorphisme \\ et de \textit{machine learning} }}
-         \only<2>{\tfblue{\makecell{Couplage des diff\'omorphisme \\ et de \textit{machine learning} }}}
-    \end{tabular}
-    \egroup
+        \begin{minipage}{0.49\linewidth}
+                \def\svgwidth{\linewidth}
+                \input{robotic_arms.pdf_tex}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.49\linewidth}
+        \large{Serial link robotic arm}
+        \begin{itemize}
+            \item[+] Large work-space
+            \item[+] Versatility
+            \item[]
+            \item[-] Complexity due to redundancy
+            \item[-] Relatively slow
+        \end{itemize}
+        \end{minipage}
     \end{center}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-    \frametitle{Th\'ematiques de recherche - Synth\`ese}
-    \vspace{-30pt}
+\begin{frame}{Robotic arm - Frequent use case}
     \begin{center}
-        \mbox{\textbf{\textbullet~Abstraction du syst\`eme en TA \hspace{2pt} \textbullet~Synth\`ese $\Leftrightarrow$ Atteignabilit\'e}} \\
-	\vspace{15pt}
-    %{\centering \textbullet~Abstraction du syst\`eme en TA \hspace{10pt} \textbullet~Synth\`ese $\Leftrightarrow$ atteignabilit\'e}
- 		\def\svgwidth{\linewidth}
-		{\relscale{.7}
-		\input{./img/pdf_tex/tempAutIntro4_fr.pdf_tex}
-		}
-	\end{center}    
-    
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-    \frametitle{Th\'ematiques de recherche - Commande et apprentissage}
-    \vspace{-10pt}
-    \begin{center}
-        \hspace{-30pt}\textbf{\textbullet~Apprendre des mouvements \hspace{25pt} \textbullet~Assurer la stabilit\'e} \\ 
-        \vspace{15pt}
-        \def\svgwidth{0.99\linewidth}
-		{\relscale{.7}
-		\input{./img/pdf_tex/diffeoIntro1_2.pdf_tex}
-		}
+     % Video here
     \end{center}
-    %{\centering \textbullet~Apprendre des mouvements \hspace{10pt} \textbullet~Assurer la stabilit\'e}
 \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}
-    \frametitle{Th\'ematiques de recherche - Perspective}
-	\vspace{-10pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Parallel robot}
     \begin{center}
-	    \textbf{Synth\`ese \textit{formelle} des strategi\`es }    
-	\vspace{0pt}
-    %\begin{center}
-    %\begin{minipage}{0.8\linewidth}
-    \begin{columns}
-    \begin{column}{0.5\linewidth}
-    \begin{itemize}
-        \item Lien avec l'ANR TickTac
-        \item Passage \'a l'\'echelle
-    \end{itemize}
-    \end{column}
-    \begin{column}{0.5\linewidth}
-    \begin{itemize}
-    	\item Appliquabilit\'e de la verification \`a la robotique
-    	\item Couplage TA et LTL    
-    \end{itemize}
-    \end{column}
-    \end{columns}    
-    %\end{minipage}
-    %\end{center}
-    
-    \vspace{10pt}
-    \def\svgwidth{0.7\linewidth}
-	{\relscale{1.}
-	\input{./img/pdf_tex/perspective.pdf_tex}
-	}    
+        \begin{minipage}{0.49\linewidth}
+                \def\svgwidth{\linewidth}
+                \input{pick_and_place.pdf_tex}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.49\linewidth}
+        \large{Serial link robotic arm}
+        \begin{itemize}
+            \item[+] Speed & precision
+            \item[+] Large ''work-space´´
+            \item[]
+            \item[-] Complexity due to internal constraints
+            \item[-] Restricted orientation
+        \end{itemize}
+        \end{minipage}
     \end{center}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{R\'esum\'e}
-
-\begin{frame}
-    \frametitle{R\'esum\'e}
-    
-    \begin{itemize}
-        \item Profil pluridisciplinaire
-        %\item Exp\'eriences dans l'industrie
-        %\item Exp\'eriences dans l'enseigment
-	    %\item Exp\'erience dans les m\'ethodes formelles, en particulier les automates temporis\'es
-	    %\item Exp\'eriences en th\'eorie de la commande et optimisation
-	    
-	    \item Exp\'eriences
-	    \begin{itemize}
-	        \item[\ding{212}] dans l'industrie
-	        \item[\ding{212}] dans l'enseignement
-	        \item[\ding{212}] dans les m\'ethodes formelles,\\en particulier les automates temporis\'es
-	        \item[\ding{212}] en th\'eorie de la commande et optimisation
-	    \end{itemize}
-	    \item M\^aitrise de Python, Cuda et \CC
-    \end{itemize}
-	\begin{center}
-		\visible<2>{ \textcolor{blue}{{\Large \textbf{Merci pour votre attention!} } }	}
-	\end{center}
-    
+\begin{frame}{Parallel robot - Frequent use case}
+    \begin{center}
+     % Video here
+    \end{center}
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Mobile robots}
+    \begin{center}
+        \begin{minipage}{0.49\linewidth}
+                \def\svgwidth{\linewidth}
+                \input{logistics_1.pdf_tex}
+        \end{minipage}
+        \hfill
+        \begin{minipage}{0.49\linewidth}
+        \large{Serial link robotic arm}
+        \begin{itemize}
+            \item[+] Increases efficiency in warehouses
+            \item[+] Semi-autonomous systems
+            \item[]
+            \item[-] Complexity due to multi-agent nature
+            \item[-] Very task specific
+        \end{itemize}
+        \end{minipage}
+    \end{center}
+\end{frame}
+
+\begin{frame}{Mobile robot - Use case}
+    \begin{center}
+     % Video here
+    \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
