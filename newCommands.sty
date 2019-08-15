@@ -1,0 +1,464 @@
+
+%\newcommand{\norm}[1]{\ensuremath{\left\Vert#1\right\rVert_2}}
+\newcommand{\lN}{$l^{2}$-norm}
+
+\newcommand{\var}{\sigma^{2}}
+\newcommand{\bs}[1]{\boldsymbol{#1}}
+%\newcommand{\bs}[1]{\mathbf{#1}}
+\newcommand{\err}{\bs{\epsilon}}
+\newcommand{\errd}{\dot{\err}}
+\newcommand{\errdd}{\ddot{\err}}
+
+\newcommand{\way}{\bs{\lambda}}
+
+%\newcommand{\acc}{\bs{\xi}^{*}_{i}}
+% GTC = General Traj Coordinate Variable
+\newcommand{\gtcs}{\xi}
+\newcommand{\gtc}{\bs{\gtcs}}
+\newcommand{\gtcd}{\dot{\gtc}}
+\newcommand{\gtcdd}{\ddot{\gtc}}
+
+% JSR = Joint Space Representation
+\newcommand{\jsrs}{\nu}
+\newcommand{\jsr}{\bs{\jsrs}}
+\newcommand{\jsrd}{\dot{\jsr}}
+\newcommand{\jsrdd}{\ddot{\jsr}}
+
+\newcommand{\J}{J(\q)}
+\newcommand{\Jd}{\dot{J}(\q, \jsr)}
+
+%\newcommand{\q}{\bs{q}}
+%\newcommand{\qd}{\dot{\bs{q}}}
+\newcommand{\qdd}{\ddot{\bs{q}}}
+
+
+%\newcommand{\x}{\bs{x}}
+%\newcommand{\xd}{\dot{\bs{x}}}
+%\newcommand{\xdd}{\ddot{\bs{x}}}
+
+
+\newcommand{\bigE}{\mathbb{E}}
+
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbX}{\mathbb{X}}
+
+\newcommand{\tx}{\ensuremath{\tilde{\x}}}
+\newcommand{\txT}{\ensuremath{\tp{\tilde{\x}}}}
+\newcommand{\txd}{\ensuremath{\dot{\tilde{\x}}}}
+\newcommand{\txdT}{\ensuremath{\tp{\dot{\tilde{\x}}}}}
+
+\newcommand{\ty}{\ensuremath{\tilde{\y}}}
+\newcommand{\tyT}{\ensuremath{\tp{\tilde{\y}}}}
+\newcommand{\tyd}{\ensuremath{\dot{\tilde{\y}}}}
+\newcommand{\tydT}{\ensuremath{\tp{\dot{\tilde{\y}}}}}
+
+\newcommand{\tX}{\tilde{\X}}
+
+\newcommand{\pos}{\bs{\xi}}
+\newcommand{\vel}{\dot{\pos}}
+\newcommand{\acc}{\ddot{\pos}}
+
+
+\newcommand{\rc}{TBRC}
+
+
+\newcommand{\mt}{MTOF}
+
+
+%\newcommand{\y}{\bs{y}}
+%\newcommand{\yd}{\dot{\bs{y}}}
+%\newcommand{\ydd}{\ddot{\bs{y}}}
+
+\newcommand{\os}{operational-space}
+\newcommand{\Os}{Operational-space}
+
+\newcommand{\js}{joint-space}
+\newcommand{\Js}{Joint-space}
+
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\N}{\amsmathbb{N}}
+\newcommand{\Z}{\amsmathbb{Z}}
+\newcommand{\R}{\amsmathbb{R}}
+%\newcommand{\sr}[1]{\subref{#1}}
+
+\newcommand{\blam}{\bs{\lambda}}
+\newcommand{\tlam}{\bs{t}^{\lambda}}
+
+\newcommand{\GP}{\mathcal{GP}}
+\newcommand{\C}{\ensuremath{\mathcal{C}}}
+\newcommand{\E}{\mathcal{E}}
+\newcommand{\optVar}{\bs{\omega}}
+\newcommand{\OptVar}{\Omega}
+
+\newcommand{\f}{\bs{\text{f}}}
+\newcommand{\w}{\bs{\omega}}
+\newcommand{\we}{{}^{e}\w}
+\newcommand{\Je}{{}^{e}J}
+\newcommand{\Jed}{{}^{e}\dot{J}}
+\newcommand{\Ce}{{}^{e}C}
+
+\newcommand{\wf}{{}^{F}\w}
+\newcommand{\Jf}{{}^{F}J}
+\newcommand{\Jfd}{{}^{F}\dot{J}}
+\newcommand{\Cf}{{}^{F}C}
+
+\newcommand{\torque}{\bs{\tau}}
+
+% \renewcommand{\algorithmiccomment}[1]{\hfill  ~#1\normalsize}
+
+\newcommand{\dof}{DoF}
+\newcommand{\wrt}{w.r.t.}
+
+\newcommand{\so}{stochastic optimization}
+\newcommand{\So}{Stochastic optimization}
+
+\newcommand{\tpm}{\text{.}}
+\newcommand{\tcm}{\text{,}}
+
+\newcommand{\tp}[1]{\ensuremath{{#1}^{\text{T}}}}
+
+% State space representations
+% \newcommand{\fvec}{\bs{\text{f}}}
+\newcommand{\fvec}{\mathbf{f}}
+\newcommand{\Ehat}{\hat{E}}
+\newcommand{\fvechat}{\hat{\mathbf{f}}}
+\newcommand{\Etilde}{\tilde{E}}
+\newcommand{\fvectilde}{\tilde{\mathbf{f}}}
+\newcommand{\uss}{\bs{u}}
+\newcommand{\Uss}{\mathcal{U}}
+\newcommand{\Xss}{\mathcal{X}}
+\newcommand{\Css}{\mathcal{C}}
+\newcommand{\Fss}{\mathcal{F}}
+
+\newcommand{\pibb}{PI\textsuperscript{BB}}
+\newcommand{\cma}{CMA-ES}
+
+\newcommand{\inpVec}{\bs{\theta}^{\mu}}
+
+%\newcommand{\rank}{\text{rank}}
+
+\newcommand{\taskFn}{\bs{\psi}}
+
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\newcommand{\bmat}[1]{\begin{bmatrix}#1\end{bmatrix}}
+
+\newcommand{\oc}{\kappa}
+\newcommand{\ocnr}{\oc^{\text{NR}}} %Ratio of nuclear norms of A/Ab
+\newcommand{\ocod}{\oc^{\text{OD}}} %Sum of objective distances to overall optimum
+\newcommand{\oced}{\oc^{\text{ED}}} %Sum of objective distances to objective ellipsoid center
+\newcommand{\ococ}{\oc^{\text{OC}}} %Sum of objective costs at overall optimum
+\newcommand{\ocev}{\oc^{\text{EV}}} %Objective elipsoid volume
+
+\newcommand{\of}{\phi}
+\newcommand{\ofod}{\of^{\text{OD}}} %Sum of objective distances to constraint ellipsoid center
+\newcommand{\ofed}{\of^{\text{ED}}} %Elipsoid center to center distance
+\newcommand{\ofee}{\of^{\text{EE}}} %Constraint elipsoid equation evaluation
+\newcommand{\ofeestar}{\of^{\text{EE}^{*}}} %Constraint elipsoid equation evaluation
+\newcommand{\ofev}{\of^{\text{EV}}} %Constraint elipsoid volume
+
+
+\newcommand{\obj}{\bs{\theta}}
+\newcommand{\Obj}{\Theta}
+
+\newcommand{\bthetadmp}{ \btheta^{\text{DMP}} }
+
+\newcommand{\st}{\bs{s}}
+\newcommand{\act}{\bs{a}}
+\newcommand{\p}{\bs{\pi}}
+\newcommand{\brho}{\bs{\rho}}
+\newcommand{\btheta}{\bs{\theta}}
+\newcommand{\bmu}{\bs{\mu}}
+\newcommand{\be}{\bs{e}}
+\newcommand{\btau}{\bs{\tau}}
+\newcommand{\PWM}{\text{PWM}}
+
+\newcommand{\comp}{\oc}
+\newcommand{\feas}{\of}
+
+
+\newcommand{\ft}{f^{\text{task}}}
+\newcommand{\fa}{f^{\acc}}
+\newcommand{\fjsa}{f^{\jsrd}}
+\newcommand{\fw}{f^{\w}}
+\newcommand{\ftor}{f^{\torque}}
+
+\newcommand{\eetask}{\fa_{\text{EE}}}
+\newcommand{\eltask}{\fa_{\text{EL}}}
+\newcommand{\jptask}{\fjsa_{\text{JP}}}
+
+
+
+
+\newcommand{\Ea}{E^{\acc}}
+\newcommand{\Ejsa}{E^{\jsrd}}
+\newcommand{\Ew}{E^{\w}}
+\newcommand{\Etor}{E^{\torque}}
+
+\newcommand{\fveca}{\fvec^{\acc}}
+\newcommand{\fvecjsa}{\fvec^{\jsrd}}
+\newcommand{\fvecw}{\fvec^{\w}}
+\newcommand{\fvector}{\fvec^{\torque}}
+
+\newcommand{\fthat}{\hat{f}^{\text{task}}}
+\newcommand{\fahat}{\hat{f}^{\acc}}
+\newcommand{\fjsahat}{\hat{f}^{\jsrd}}
+\newcommand{\fwhat}{\hat{f}^{\w}}
+\newcommand{\ftorhat}{\hat{f}^{\torque}}
+
+\newcommand{\Eahat}{\hat{E}^{\acc}}
+\newcommand{\Ejsahat}{\hat{E}^{\jsrd}}
+\newcommand{\Ewhat}{\hat{E}^{\w}}
+\newcommand{\Etorhat}{\hat{E}^{\torque}}
+
+\newcommand{\fvecahat}{\hat{\fvec}^{\acc}}
+\newcommand{\fvecjsahat}{\hat{\fvec}^{\jsrd}}
+\newcommand{\fvecwhat}{\hat{\fvec}^{\w}}
+\newcommand{\fvectorhat}{\hat{\fvec}^{\torque}}
+
+
+
+\newcommand{\nt}{n_{\text{task}}}
+\newcommand{\optvar}{\bs{\chi}}
+\newcommand{\optvarhat}{\hat{\optvar}}
+\newcommand{\optvartilde}{\tilde{\optvar}}
+\newcommand{\optvarcheck}{\check{\optvar}}
+\newcommand{\0}{\bs{0}}
+
+
+\newcommand{\jtrac}{j^{\text{T}}}
+\newcommand{\jtracstar}{j^{\text{T}^{*}}}
+\newcommand{\jtrachat}{\hat{j}^{\text{T}}}
+\newcommand{\jtrachatstar}{\hat{j}^{\text{T}^{*}}}
+
+\newcommand{\jgoal}{j^{\text{G}}}
+\newcommand{\jgoalstar}{j^{\text{G}^{*}}}
+\newcommand{\jgoalhat}{\hat{j}^{\text{G}}}
+\newcommand{\jgoalhatstar}{\hat{j}^{\text{G}^{*}}}
+
+\newcommand{\jenergy}{j^{\text{E}}}
+\newcommand{\jenergystar}{j^{\text{E}^{*}}}
+\newcommand{\jenergyhat}{\hat{j}^{\text{E}}}
+\newcommand{\jenergyhatstar}{\hat{j}^{\text{E}^{*}}}
+
+\newcommand{\jtp}{j^{\text{TP}}}
+\newcommand{\jtpstar}{j^{\text{TP}^{*}}}
+\newcommand{\jtphat}{\hat{j}^{\text{TP}}}
+\newcommand{\jtphatstar}{\hat{j}^{\text{TP}^{*}}}
+
+\newcommand{\jperf}{j^{\text{P}}}
+\newcommand{\jperfstar}{j^{\text{P}^{*}}}
+\newcommand{\jperfhat}{\hat{j}^{\text{P}}}
+\newcommand{\jperfhatstar}{\hat{j}^{\text{P}^{*}}}
+
+\usepackage{mathtools}
+
+%\usepackage{paralist}
+\newcommand{\inlinelist}[1]{\begin{inparaenum}[(a)] #1 \end{inparaenum}}
+
+\newcommand{\sr}[1]{\protect\subref{#1}}
+
+\newcommand{\balpha}{\ensuremath{\bs{\alpha}}}
+
+%\newcommand{\eMin}{\ensuremath{\underline{\lambda}}}
+%\newcommand{\eMax}{\ensuremath{\overline{\lambda}}}
+\newcommand{\eMin}{\ensuremath{{\lambda_{\text{min}}}}}
+\newcommand{\eMax}{\ensuremath{{\lambda_{\text{max}}}}}
+
+%\newcommand{\Cc}{\mathcal{C}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\CS}{\mathcal{C}}
+%\newcommand{\tCS}{\overset{\sim}{\mathcal{C}}}
+\newcommand{\tCS}{{\stackrel{\sim}{\smash{\mathcal{C}}\rule{0.pt}{1.15ex}}}}
+\newcommand{\tC}{{\stackrel{\sim}{\smash{C}\rule{0.pt}{1.15ex}}}}
+\newcommand{\FS}{\mathcal{F}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\Ui}{\mathcal{U}}
+\newcommand{\Hs}{\mathcal{H}}
+\newcommand{\Ps}{\mathcal{P}}
+\newcommand{\Inc}{\mathtt{Inc}}
+\newcommand{\Ci}{\mathcal{C}}
+\newcommand{\I}{\mathcal{I}}
+
+\newcommand{\eref}[1]{(\ref{#1})}
+\newcommand{\esref}[1]{(\ref{#1})}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\sref}[1]{section~\ref{#1}}
+\newcommand{\aref}[1]{Algorithm~\ref{#1}}
+\newcommand{\tref}[1]{Theorem~\ref{#1}}
+\newcommand{\tabref}[1]{Table~\ref{#1}}
+
+
+\newcommand{\mo}{\ensuremath{ \bs m }}
+\newcommand{\x}{\ensuremath{ \bs x }}
+\newcommand{\vv}{\ensuremath{ \bs v }}
+\newcommand{\cv}{\ensuremath{ \bs c }}
+\newcommand{\uv}{\ensuremath{ \bs u }}
+\newcommand{\uvv}{\ensuremath{ u }}
+%\newcommand{\uvv}{\ensuremath{ \bs u }}
+\newcommand{\z}{\ensuremath{ \bs z }}
+\newcommand{\y}{\ensuremath{ \bs y }}
+\newcommand{\xd}{\ensuremath{ \dot{\bs x} }}
+\newcommand{\yd}{\ensuremath{ \dot{\bs y} }}
+\newcommand{\xr}{\ensuremath{ \bs{x}_{\text{ref}} }}
+\newcommand{\yr}{\ensuremath{ \bs{y}_{\text{ref}} }}
+\newcommand{\xdr}{\ensuremath{ \dot{\bs x}_{\text{ref}} }}
+\newcommand{\ydr}{\ensuremath{ \dot{\bs y}_{\text{ref}} }}
+\newcommand{\ui}{\ensuremath{ \bs u }}
+\newcommand{\uir}{\ensuremath{ \bs{u}_{\text{ref}} }}
+\newcommand{\n}{\ensuremath{ \bs n }}
+\newcommand{\e}{\ensuremath{ \bs e }}
+
+\newcommand{\setO}{\ensuremath{ \left\lbrace \bs 0 \right\rbrace }}
+
+\newcommand{\q}{\ensuremath{ \bs q }}
+\newcommand{\qd}{\ensuremath{ \dot{\bs{q}} }}
+
+\newcommand{\blpha}{\ensuremath{ \bs{\alpha} }}
+
+\newcommand{\xT}{\ensuremath{ \tp{\bs x }}}
+\newcommand{\zT}{\ensuremath{ \tp{\bs z }}}
+\newcommand{\yT}{\ensuremath{ \tp{\bs y }}}
+\newcommand{\xdT}{\ensuremath{ \tp{\dot{\bs x}} }}
+\newcommand{\ydT}{\ensuremath{ \tp{\dot{\bs y}} }}
+\newcommand{\xrT}{\ensuremath{ \tp{\bs{x}}_{\text{ref}} }}
+\newcommand{\yrT}{\ensuremath{ \tp{\bs{y}}_{\text{ref}} }}
+\newcommand{\xdrT}{\ensuremath{ \tp{\dot{\bs x}}_{\text{ref}} }}
+\newcommand{\ydrT}{\ensuremath{ \tp{\dot{\bs y}}_{\text{ref}} }}
+\newcommand{\uiT}{\ensuremath{ \tp{\bs u }}}
+\newcommand{\uirT}{\ensuremath{ \tp{\bs{u}}_{\text{ref}} }}
+\newcommand{\nT}{\ensuremath{ \tp{\bs n }}}
+
+\newcommand{\qT}{\ensuremath{ \tp{\bs{q}} }}
+\newcommand{\qdT}{\ensuremath{ \tp{\dot{\bs{q}}} }}
+
+\newcommand{\Yb}{\ensuremath{\bs Y}}
+\newcommand{\Xb}{\ensuremath{\bs X}}
+\newcommand{\xp}{\ensuremath{\x^\prime}}
+\newcommand{\xpp}{\ensuremath{\x^{\prime\prime}}}
+
+\newcommand{\inv}[1]{\ensuremath{#1^{-1}}}
+%\newcommand{\Sym}{\mathcal{S}}
+\newcommand{\Sym}{\mathbb{S}}
+\newcommand{\Symp}[1]{ \ifthenelse{\equal{#1}{}}{\mathbb{S}_+}{\mathbb{S}_+^{#1}} }
+\newcommand{\Sympp}[1]{ \ifthenelse{\equal{#1}{}}{\mathbb{S}_{++}}{\mathbb{S}_{++}^{#1}} }
+\newcommand{\Symn}[1]{ \ifthenelse{\equal{#1}{}}{\mathbb{S}_-}{\mathbb{S}_-^{#1}} }
+\newcommand{\Symnn}[1]{ \ifthenelse{\equal{#1}{}}{\mathbb{S}_{--}}{\mathbb{S}_{--}^{#1}} }
+
+\newcommand{\lMaps}{\ensuremath{\mapsto_{\text{Lin}}}}
+
+\newcommand{\di}{\ensuremath{\mathrm{d}}}
+
+\newcommand{\norm}[1]{\ensuremath{\left\Vert#1\right\rVert_2}}
+\newcommand{\normP}[2]{\ensuremath{\ensuremath{\left\Vert#1\right\rVert_{#2}}}}
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\newcommand{\absv}[1]{\ensuremath{\left| #1 \right|}}
+
+\newcommand{\pdiff}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+\newcommand{\diff}[1]{\ensuremath{\frac{\text{d}}{\text{d}\,#1}}}
+\newcommand{\intF}[4]{\ensuremath{\int_{#1}^{#2} #3\,d #4}}
+\newcommand{\lieD}[2]{\ensuremath{\langle #1,\,#2\rangle}}
+\newcommand{\lieDN}[2]{\ensuremath{\langle \nabla_{\x}#1,\,#2\rangle}}
+\newcommand{\lieDNX}[3]{\ensuremath{\langle \nabla_{{#1}}#2,\,#3\rangle}}
+
+%\DeclareMathOperator*{\argmin}{\arg\!\min}
+\newcommand{\argmin}[1]{\ensuremath{\underset{#1}{{\arg\!\min}}}}
+\newcommand{\argmax}[1]{\ensuremath{\underset{#1}{{\arg\!\max}}}}
+
+ % Anything in the title that should appear in the main title but 
+ % not in the article's header or the volume's table of
+ % contents should be placed inside \titletag{}
+
+ %\title{Title of the Article\titletag{\thanks{Some footnote}}}
+\DeclareMathOperator{\chol}{chol}
+\DeclareMathOperator{\svd}{svd}
+\DeclareMathOperator{\degp}{deg}
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\nullS}{null}
+\newcommand{\tr}[1]{\ensuremath{\text{tr}\left(#1\right)}}
+\newcommand{\rank}[1]{\ensuremath{\text{rank}\left(#1\right)}}
+%\DeclareMathOperator{\tr}[1]{tr(#1)}
+
+%\usepackage{eqparbox}
+%\usepackage{array}
+%\renewcommand\algorithmiccomment[1]{%
+%  \hfill\#\ \eqparbox{COMMENT}{#1}%
+%}
+%\newcommand\LongComment[1]{%
+%  \hfill\#\ \begin{minipage}[t]{\eqboxwidth{COMMENT}}#1\strut\end{minipage}%
+%}
+
+
+
+\newcommand{\circled}[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner
+    sep=1pt] (char) {#1};}} 
+    
+\definecolor{cf11}{RGB}{66,152,36}
+\definecolor{cf12}{RGB}{55,155,207}
+\definecolor{cf13}{RGB}{219,112,107}
+\definecolor{cfLilaSl}{RGB}{150,150,255}
+\definecolor{cfGreenSl}{RGB}{0,255,0}
+
+\newcommand{\scaa}{\color{cf11}}
+\newcommand{\scab}{\color{cf12}}
+\newcommand{\scac}{\color{cf13}}
+\newcommand{\ssr}[1]{\larger[#1]}
+
+\newcommand{\F}{\mathcal{F}}
+\renewcommand{\FS}{\mathcal{F}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\Q}{\amsmathbb{Q}}
+%\DeclareMathSymbol{\bot}{\mathord}{symbols}{"3F}
+\def\reff{\text{ref}}
+
+\newcommand{\Fa}[2]{\textcolor{cf11}{\ensuremath{\F_{#1}^{#2}}}}
+\newcommand{\FaL}[2]{{\relscale{1.2}\textcolor{cf11}{\ensuremath{\F_{#1}^{#2}}}}}
+\newcommand{\Fas}[3]{{\relscale{#1}\textcolor{cf11}{\ensuremath{\F_{#2}^{#3}}}}}
+\newcommand{\Fap}[3]{\textcolor{cf11}{\ensuremath{\F_{#1}^{#2}({#3}}}}
+\newcommand{\Fasp}[4]{{\relscale{#1}\textcolor{cf11}{\ensuremath{\F_{#2}^{#3}({#4}}}}}
+
+\newcommand{\Fb}[2]{\textcolor{cf12}{\ensuremath{\F_{#1}^{#2}}}}
+\newcommand{\FbL}[2]{{\relscale{1.2}\textcolor{cf12}{\ensuremath{\F_{#1}^{#2}}}}}
+\newcommand{\Fbs}[3]{{\relscale{#1}\textcolor{cf12}{\ensuremath{\F_{#2}^{#3}}}}}
+\newcommand{\Fbp}[3]{\textcolor{cf12}{\ensuremath{\F_{#1}^{#2}({#3}}}}
+\newcommand{\Fbsp}[4]{{\relscale{#1}\textcolor{cf12}{\ensuremath{\F_{#2}^{#3}({#4}}}}}
+
+\newcommand{\Fc}[2]{\textcolor{cf13}{\ensuremath{\F_{#1}^{#2}}}}
+\newcommand{\FcL}[2]{{\relscale{10.2}\textcolor{cf13}{\ensuremath{\F_{#1}^{#2}}}}}
+\newcommand{\Fcs}[3]{{\relscale{#1}\textcolor{cf13}{\ensuremath{\F_{#2}^{#3}}}}}
+\newcommand{\Fcp}[3]{\textcolor{cf13}{\ensuremath{\F_{#1}^{#2}({#3}}}}
+\newcommand{\Fcsp}[4]{{\relscale{#1}\textcolor{cf13}{\ensuremath{\F_{#2}^{#3}({#4}}}}}
+\newcommand{\rsSL}{\relscale{1.2}}
+\newcommand{\rsSS}{\relscale{0.8}}
+\newcommand{\rsSeS}{\relscale{0.7}}
+
+
+\newcommand{\fPad}{\\ \smallskip}
+\newcommand{\fPadm}{\\ \medskip}
+\newcommand{\fPadb}{\\ \bigskip}
+
+\newcommand\myboxk[2][]{\tikz[overlay]\node[draw=black,inner sep=2pt, anchor=text, rectangle, rounded corners=1mm,#1] {#2};\phantom{#2}}
+\newcommand\myboxr[2][]{\tikz[overlay]\node[draw=red,inner sep=2pt, anchor=text, rectangle, rounded corners=1mm,#1] {#2};\phantom{#2}}
+\newcommand\myboxb[2][]{\tikz[overlay]\node[draw=blue,inner sep=2pt, anchor=text, rectangle, rounded corners=1mm,#1] {#2};\phantom{#2}}
+
+\newcommand\myboxw[2][]{\tikz[overlay]\node[draw=white, fill=white, opacity=.9,inner sep=2pt, anchor=text, rectangle, rounded corners=1.5mm,#1] {#2};\phantom{#2}}
+
+\def\dotm#1{\dothelp#1\relax}
+\def\dothelp#1#2\relax{%
+  \if\relax#2\relax%
+    \ifx A#1\skew{6}\dot#1\else\dot#1\fi
+  \else
+    \dot{#1#2}%
+  \fi%
+}

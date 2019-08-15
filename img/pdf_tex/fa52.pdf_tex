@@ -1,0 +1,82 @@
+%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'fa52.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{3846.70825195bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.38862521)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{fa52.pdf}}%
+    \put(0.36574418,0.35431472){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}obstacle in the state space\end{tabular}}}}%
+    \put(0.03061015,0.34777277){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$u_0(\x,t)$\end{tabular}}}}%
+    \put(0.17398759,0.35393402){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$u_1(\x,t)$\end{tabular}}}}%
+    \put(0.03802384,0.06565463){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$u_2(\x,t)$\end{tabular}}}}%
+    \put(0.03927602,0.27523133){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\smaller $t_0^1$}\end{tabular}}}}%
+    \put(0.14838311,0.25789961){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\smaller $t_1^1$}\end{tabular}}}}%
+    \put(0.18856118,0.20196543){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\smaller $t_0^2$}\end{tabular}}}}%
+    \put(0.20195388,0.10365603){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\smaller $t_1^2$}\end{tabular}}}}%
+    \put(0.20037827,0.05244868){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\smaller $t_0^3$}\end{tabular}}}}%
+    \put(0.47486589,0.21571771){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\smaller $t_1^3$}\end{tabular}}}}%
+    \put(0.44459478,0.27198641){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\smaller $t_0^4$}\end{tabular}}}}%
+    \put(0.54898294,0.3082413){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\smaller $t_1^4$}\end{tabular}}}}%
+    \put(0.80877864,0.34321604){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.08170041\unitlength}\centering \end{minipage}}}%
+    \put(0.84731658,0.35246515){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.25897494\unitlength}\centering \end{minipage}}}%
+    \put(0.22454359,0.32524471){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.9619067\unitlength}\centering {\centering {\larger[2] \scab $\F_1^0$} \\ {\larger[1] $\left[t_0^2,t_1^2\right] \subset I_1^0$}}\end{minipage}}}%
+    \put(0.98682392,0.10196859){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.3275724\unitlength}\centering \end{minipage}}}%
+    \put(0.58733819,0.16700009){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger[1] $\F_0^0(t_1^1) \subset \F_1^0(t_0^2)$}\end{tabular}}}}%
+    \put(0.68196958,-0.01181591){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger[1] $\F_2^0(t_1^3) \subset \F_0^0(t_0^4)$}\end{tabular}}}}%
+    \put(-0.1670832,0.07610761){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{1.20228907\unitlength}\centering {\centering {\larger[2] \scaa $\F_0^0$}\\ {\larger[1] $\left[t_0^4,t_1^4\right],\left[t_0^1,t_1^1\right] \subset I_0^0$}}\end{minipage}}}%
+    \put(0.79911608,0.16670321){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger[1] $\F_1^0(t_2^1) \subset \F_2^0(t_0^3)$}\end{tabular}}}}%
+    \put(0.46398446,0.07601027){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\begin{minipage}{0.91874436\unitlength}\centering {\centering \larger[2] \scac $\F_2^0$}\\ {\larger[1] $\left[t_0^3,t_1^3\right] \subset I_2^0$}\end{minipage}}}%
+    \put(0.00792203,0.20021492){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger[2] \scaa  $\F_0^0$}\end{tabular}}}}%
+    \put(0.07399286,0.12590036){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger[2] \scac  $\F_2^0$}\end{tabular}}}}%
+    \put(0.2547038,0.31034446){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger[2] \scab  $\F_1^0$}\end{tabular}}}}%
+  \end{picture}%
+\endgroup%
