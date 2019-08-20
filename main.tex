@@ -118,7 +118,7 @@
 
 \date{\today} % Date, can be changed to a custom date
 
-\graphicspath{{./img/pdf_tex/}}
+\graphicspath{{./img/pdf_tex/}{./img/}}
 \makeatletter
 \def\input@path{{./img/pdf_tex/}}
 \makeatother
@@ -129,7 +129,7 @@
     \textcolor{blue}{
     \textbf{
     {\Large
-    Robotics from perspectives\\[4pt]
+    Robotics from different perspectives\\[4pt]
     }}
     }
     \rule{.9\linewidth}{2pt}\\[4pt]
@@ -157,7 +157,137 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The historical perspective}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{The historical perspective - etymology}
+\begin{center}
 
+\begin{itemize}
+\item robu : Bulgarian for servant
+\item rabota : Russian for work
+\item robota : Czech for forced labour
+\item robot : The term was used for the first time in a play in the 1920's (Karel Capek, Rossum's Universal Robots)
+\item robotics : used in 1942 by Isaac Asimov in ``Runaround'' (three laws of robotics)
+\end{itemize}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{The historical perspective - beginnings}
+\begin{center}
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{blacksmith.jpg}
+\end{figure}
+
+{\small source https://commons.wikimedia.org/w/index.php?curid=1520727}
+
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Current definition: ISO 8373:2012(en)}
+\begin{center}
+\textbf{\large  Robots and robotic devices\\[4pt]}
+
+Actuated mechanism (re-)programmable in two or more axes with a degree of autonomy, moving within its environment, to perform intended tasks.
+
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{First manipulator - Unimate}
+\begin{center}
+\begin{minipage}{0.49\linewidth}
+\begin{center}
+\includegraphics[width=0.8\linewidth]{unimate.png}
+\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{0.49\linewidth}
+\begin{itemize}
+\item Developed in the 50's
+\item Industrialized in 61
+\item Only predefined tasks
+\end{itemize}
+\end{minipage}
+
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{First mobile autonomous robot - Shakey}
+\begin{center}
+\begin{minipage}{0.49\linewidth}
+\begin{center}
+\includegraphics[width=0.8\linewidth]{SRI_Shakey_with_callouts.jpg}
+\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{0.49\linewidth}
+\begin{itemize}
+\item Developed from 66 to 72
+\item Object recognition
+\item Path and task planning
+\end{itemize}
+\end{minipage}
+
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{First mobile autonomous robot - Shakey}
+\begin{center}
+\begin{minipage}{0.49\linewidth}
+\begin{center}
+\includegraphics[width=0.8\linewidth]{SRI_Shakey_with_callouts.jpg}
+\end{center}
+\end{minipage}
+\hfill
+\begin{minipage}{0.49\linewidth}
+\begin{itemize}
+\item Developed from 66 to 72
+\item Object recognition
+\item Path and task planning
+\end{itemize}
+\end{minipage}
+
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Autonomous robots state of the art - Atlas}
+\begin{center}
+\only<1>{
+	\begin{minipage}{0.49\linewidth}
+	\begin{center}
+	\includegraphics[width=0.8\linewidth]{Atlas_intro.jpg}
+	\end{center}
+	\end{minipage}
+	\hfill
+	\begin{minipage}{0.49\linewidth}
+	\begin{itemize}
+	\item Humanoid robot developed by Boston dynamics
+	\item Largely autonomous
+	\item Path and task planning
+	\end{itemize}
+	\end{minipage}
+}
+\only<2>{
+\includegraphics[width=0.99\linewidth]{Atlas_trying.png}
+}
+\only<3>{
+\includegraphics[width=0.99\linewidth]{Atlas_push.jpg}
+}
+\only<4>{
+\includegraphics[width=0.99\linewidth]{Atlas_backflip.jpg}
+}
+\end{center}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The control theoretic perspective}
@@ -171,7 +301,7 @@
 \begin{frame}{Control theory - Realization I}
 \begin{center}
 	\vspace{-6pt}
-    \textbf{\Large Centrifugal governor}
+    \textbf{\Large Centrifugal governor\\[4pt]}
     \def\svgwidth{.5\linewidth}
     \input{regulator.pdf_tex}
     \visible<2>{
