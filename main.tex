@@ -292,9 +292,20 @@ Actuated mechanism (re-)programmable in two or more axes with a degree of autono
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The control theoretic perspective}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Robot control - Overview}
+\begin{center}
+\only<1>{
+\includegraphics[width=0.7\linewidth]{control1.pdf}
+}
+\only<2>{
+\includegraphics[width=0.85\linewidth]{control2.pdf}
+}
+\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Control theory - Goal}
 \begin{center}
-{\large Control theory seeks means to generate control signals $\uv(t)$ such that the state evolves in a desired way. }
+{\large Control theory seeks means to generate control signals or inputs such that the state evolves in a desired way. }
 \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -312,7 +323,7 @@ Actuated mechanism (re-)programmable in two or more axes with a degree of autono
     \end{minipage}
     \begin{minipage}{0.49\linewidth}
     \begin{center}
-        negative feedback between opening angle and 
+        negative feedback between opening angle and input power
     \end{center}
     \end{minipage}
     }
@@ -328,7 +339,7 @@ A robot from a control theoretic perspective looks like this:
 \visible<1->{
     \begin{columns}
     \begin{column}{0.5\linewidth}
-        $\x$ : robot state \\
+        $\x$ : system state \\
         $\y$ : output state \\
         $\omega_{\x}$ : perturbations \\
         $\omega_{\y}$ : (measurement) noise
@@ -433,9 +444,10 @@ By allowing for more expressive behaviour (obstacles), the problem becomes (dras
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Trajectory stabilization}
 \begin{center}
-Trajectory generators give us a reference trajectory and in an ideal world we would simply have to use $\uv(t)$.\\
-\visible<2->{Sadly the world isn't perfect: modelling errors, noise, friction, ...}
-\visible<3->{
+Trajectory generators give us a reference trajectory and in an ideal world we could simply replay the inputs $\uv(t)$.\\
+\visible<2->{This is called open-loop control\\[4pt]}
+\visible<3->{Sadly the world isn't perfect: modelling errors, noise, friction, ...}
+\visible<4->{
 \begin{figure}
 	\def\svgwidth{.8\linewidth}
 	\input{trajectory_stab_1.pdf_tex}	
@@ -451,23 +463,51 @@ Compute a control law $g(\delta\x)$ s.t. the system trajectory converges to its 
 \begin{center}
 Consider the discrete-time linear system:
 \begin{equation*}
-\x_k = A.\x_{k-1} + B.\uv_{k-1}
+\x_i = A.\x_{i-1} + B.\uv_{i-1}
 \end{equation*}
 and optimality defined by the cost function
 \begin{equation}
-J(\x_0, \uv) = \sum_{{i=0}}^{{N-1}}\left(\xT_i.Q.\xT + \tp{\uv}_i.R.\tp{\uv}_i\right) + \xT_N.Q.\xT_N
+J(\x_0) = \sum_{{i=0}}^{{N-1}}\left(\xT_i.Q.\x_i + \tp{\uv}_i.R.\uv_i\right) + \xT_N.Q.\x_N
 \end{equation}
 Possible methods to obtain the Linear Quadratic Regulator (LQR):\\[6pt]
 \begin{minipage}[c]{0.5\linewidth}
 \begin{itemize}
-\item via Least-squares
-\item via Dynamic programming
-\item via Convex optimization
+\item via Least-Squares
+\item via Dynamic Programming
+\item via Convex Optimization
 \end{itemize}
 \end{minipage}
 \end{center}
 \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Optimal control - Dynamic Programming}
+\begin{center}
+A solution can be found using dynamic programming and iterating from end to start.\\[4pt]
+
+The final cost is ``fixed'': $J(\x_N) = \xT_N.Q.\x_N$ \\[4pt]
+\visible<2->{
+	The cost for $i=N-1$ is:\\[4pt]
+	$J(\x_{N-1}) = \xT_{N-1}.Q.\x_{N-1} + \tp{\uv}_{N-1}.R.\uv_{N-1} + \xT_N.Q.\x_N$\\
+	and moreover $\x_i = A.\x_{i-1} + B.\uv_{i-1}$
+} 
+\visible<3->{ so we get:\\[4pt]
+$J(\x_{N-1}) = \xT_{N-1}.Q.\x_{N-1} + \tp{\uv}_{N-1}.R.\uv_{N-1} + J(A.\x_{i-1} + B.\uv_{i-1})$\\
+}
+
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}{Optimal control - Dynamic Programming}
+\begin{center}
+
+This means that we can solve the problem by recursively solving :\\[4pt]
+$\uv_{N-1} = \argmin_\uv \tp{\uv}.R.\uv + J(A.\x_{i-1} + B.\uv)$
+
+\end{center}
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -560,6 +600,15 @@ Possible methods to obtain the Linear Quadratic Regulator (LQR):\\[6pt]
     \end{center}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+
+\begin{center}
+\textbf{\Large Robotics from various perspectives}\\[6pt]
+Philipp Schlehuber-Caissier
+\end{center}
+	
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
