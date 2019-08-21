@@ -106,6 +106,8 @@
 
 \beamertemplatenavigationsymbolsempty
 
+\usepackage{pgfplots}
+
 \renewcommand{\circled}[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,innersep=1pt] (char) {#1};}} 
 
 %\newcommand{\results}[1]{{\small \textit{\textquote{#1}} }}
@@ -120,7 +122,7 @@
 
 \graphicspath{{./img/pdf_tex/}{./img/}}
 \makeatletter
-\def\input@path{{./img/pdf_tex/}}
+\def\input@path{{./img/pdf_tex/}{./img/pgf/}}
 \makeatother
 
 \begin{document}
@@ -499,15 +501,73 @@ $J(\x_{N-1}) = \xT_{N-1}.Q.\x_{N-1} + \tp{\uv}_{N-1}.R.\uv_{N-1} + J(A.\x_{i-1} 
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{frame}{Optimal control - Dynamic Programming}
 \begin{center}
 
 This means that we can solve the problem by recursively solving :\\[4pt]
-$\uv_{N-1} = \argmin_\uv \tp{\uv}.R.\uv + J(A.\x_{i-1} + B.\uv)$
+$\uv_{N-1} = \argmin{\uv}\ \tp{\uv}.R.\uv + J(A.\x_{i-1} + B.\uv)$\\[2pt]
+
+\visible<1->{
+	and after some linear algebra one can find an optimal linear feedback matrix:\\[4pt]
+	$\uv_{N-1} = K_{N-1}.\x$ \\[2pt]
+	So we have established a time-dependent linear control law that is optimal in the sense of the cost function.
+}
 
 \end{center}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Optimal control - 2d linear system}
+\begin{center}
+\only<1>{
+Mass-spring-damper model
+\begin{equation}
+\xd = \begin{pmatrix} \dot{x} \\ \ddot{x} \end{pmatrix} = \begin{bmatrix} 0. & 1. \\ -0.5 & -0.15 \end{bmatrix} . \begin{pmatrix} x \\ \dot{x} \end{pmatrix}
+\end{equation}
+with 
+\begin{equation}
+Q = \begin{bmatrix} 1. & 0. \\ 0. & 1. \end{bmatrix} \ \ \ \ R = \begin{bmatrix} 1. \end{bmatrix}
+\end{equation}
+}
+\only<2>{
+\input{linear.pgf}
+}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Optimal control - Constrained input}
+\begin{center}
+\only<1>{
+\input{linear_comparison.pgf}
+}
+\only<2>{
+\input{linear_comparison_text.pgf}
+}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Optimal control - Convex}
+\begin{center}
+Another method for finding the optimal control law is based on convex optimization.\\What is convex optimization?\\[4pt]
+
+The final cost is ``fixed'': $J(\x_N) = \xT_N.Q.\x_N$ \\[4pt]
+\visible<2->{
+	The cost for $i=N-1$ is:\\[4pt]
+	$J(\x_{N-1}) = \xT_{N-1}.Q.\x_{N-1} + \tp{\uv}_{N-1}.R.\uv_{N-1} + \xT_N.Q.\x_N$\\
+	and moreover $\x_i = A.\x_{i-1} + B.\uv_{i-1}$
+} 
+\visible<3->{ so we get:\\[4pt]
+$J(\x_{N-1}) = \xT_{N-1}.Q.\x_{N-1} + \tp{\uv}_{N-1}.R.\uv_{N-1} + J(A.\x_{i-1} + B.\uv_{i-1})$\\
+}
+
+\end{center}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

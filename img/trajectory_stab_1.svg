@@ -28,7 +28,7 @@
        inkscape:stockid="Arrow1Mend">
       <path
          transform="matrix(-0.4,0,0,-0.4,-4,0)"
-         style="fill:#00c800;fill-opacity:1;fill-rule:evenodd;stroke:#00c800;stroke-width:1.00000003pt;stroke-opacity:1"
+         style="fill:#000b00;fill-opacity:1;fill-rule:evenodd;stroke:#000b00;stroke-width:1.00000003pt;stroke-opacity:1"
          d="M 0,0 5,-5 -12.5,0 5,5 Z"
          id="path4390"
          inkscape:connector-curvature="0" />
@@ -45,7 +45,7 @@
       <path
          id="path4085"
          d="M 0,0 5,-5 -12.5,0 5,5 Z"
-         style="fill:#0000b4;fill-opacity:1;fill-rule:evenodd;stroke:#0000b4;stroke-width:1.00000003pt;stroke-opacity:1"
+         style="fill:#0000fd;fill-opacity:1;fill-rule:evenodd;stroke:#0000fd;stroke-width:1.00000003pt;stroke-opacity:1"
          transform="matrix(-0.4,0,0,-0.4,-4,0)"
          inkscape:connector-curvature="0" />
     </marker>
@@ -72,9 +72,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.8445543"
-     inkscape:cx="154.86859"
-     inkscape:cy="24.166507"
+     inkscape:zoom="3.6891086"
+     inkscape:cx="192.68411"
+     inkscape:cy="-30.3782"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -82,10 +82,10 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:window-width="1855"
-     inkscape:window-height="1056"
-     inkscape:window-x="65"
-     inkscape:window-y="24"
+     inkscape:window-width="2493"
+     inkscape:window-height="1385"
+     inkscape:window-x="67"
+     inkscape:window-y="27"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata3502">
@@ -105,7 +105,7 @@
      id="layer1"
      transform="translate(5.6614012,-135.17825)">
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#0000b4;stroke-width:0.40000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       style="fill:none;fill-rule:evenodd;stroke:#0000fd;stroke-width:0.40000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
        d="m 13.38844,157.43566 c 35.14913,-15.42802 58.105541,-8.50272 80.533491,-0.60857"
        id="path4050"
        inkscape:connector-curvature="0"
@@ -122,7 +122,7 @@
          y="154.79854"
          style="stroke-width:0.26458332px">$\x^r;\ \uv^r$</tspan></text>
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#00c800;stroke-width:0.40000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4392)"
+       style="fill:none;fill-rule:evenodd;stroke:#000b00;stroke-width:0.40000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4392)"
        d="M 9.1284815,146.48148 C 50.942395,132.96495 74.288249,144.24 93.921931,156.82709"
        id="path4058"
        inkscape:connector-curvature="0"
