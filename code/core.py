@@ -21,7 +21,7 @@ else:
     matplotlib.use("Qt5Agg")
 
 beamerFigSize = (5*.8,3.5*.8)
-
+beamerFigSizeSmall = (5*.55,3.5*.55)
 
 import numpy as np
 from numpy.linalg import multi_dot as np_multidot

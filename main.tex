@@ -552,22 +552,34 @@ Q = \begin{bmatrix} 1. & 0. \\ 0. & 1. \end{bmatrix} \ \ \ \ R = \begin{bmatrix}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Optimal control - Convex}
+\begin{frame}{Optimal control - Convex Optimization}
 \begin{center}
-Another method for finding the optimal control law is based on convex optimization.\\What is convex optimization?\\[4pt]
-
-The final cost is ``fixed'': $J(\x_N) = \xT_N.Q.\x_N$ \\[4pt]
-\visible<2->{
-	The cost for $i=N-1$ is:\\[4pt]
-	$J(\x_{N-1}) = \xT_{N-1}.Q.\x_{N-1} + \tp{\uv}_{N-1}.R.\uv_{N-1} + \xT_N.Q.\x_N$\\
-	and moreover $\x_i = A.\x_{i-1} + B.\uv_{i-1}$
-} 
-\visible<3->{ so we get:\\[4pt]
-$J(\x_{N-1}) = \xT_{N-1}.Q.\x_{N-1} + \tp{\uv}_{N-1}.R.\uv_{N-1} + J(A.\x_{i-1} + B.\uv_{i-1})$\\
+Another method for finding the optimal control law is based on convex optimization.\\What is convex optimization?\\[2pt]
+\only<1>{
+	\input{opt_cvxCstr.pgf}
 }
-
+\only<2>{
+	\input{opt_ncvxCstr.pgf}
+}
 \end{center}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Optimal control - Convex Optimization}
+\begin{center}
+\only<1>{
+\input{cvx_comparison_text.pgf}
+}
+\only<2>{
+\input{cvx_stateCstr_comparison_text.pgf}
+}
+\only<3>{
+\input{cvx_stateCstr_det_comparison_text.pgf}
+}
+\end{center}
+\end{frame}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

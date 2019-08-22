@@ -1,22 +1,7 @@
-from core import *
-
 from trajectories import getTraj1
 
+from definitions import *
 
-Nsteps = 20
-tFinal = 20.
-dt = tFinal/Nsteps
-
-# Define matrices
-A = np.matrix([[0.,1.],[-0.5,-0.15]])
-B = np.matrix([[0.],[0.2]])
-
-Ad = sp_linalg.expm(A*dt)
-Bd = np.matrix( np.dot(np.dot(sp_linalg.inv(A), (Ad-np.identity(2))), B))
-
-# Control
-Q = np.identity(2)*1.
-R = np.identity(1)
 
 # Compute control and cost-matrices
 # Safe all (naive implementation)
@@ -48,7 +33,7 @@ def costFun(t,x,u=np.matrix(np.zeros((1,1)))):
 
 # Simulate
 # Discrete
-x0 = traj.xref_c(0.) + np.array([[-0.5],[-0.3]])*0.5
+x0 = traj.xref_c(0.) + dxBase
 X = np.matrix(np.zeros((2,Nsteps)))
 X[:,[0]] = x0
 Udelta = np.matrix(np.zeros((1, Nsteps)))
@@ -78,8 +63,7 @@ aa[-2].step(lqr_DynProg.t, np.array(Utot[0,:]).squeeze(), '-k', where='post')
 aa[-1].step(lqr_DynProg.t, np.array(Udelta[0,:]).squeeze(), '-k', where='post')
 
 
-# What if we limit?
-uAbs = 0.065
+# What if we limit
 
 Xsubopt = np.matrix(np.zeros((2,Nsteps)))
 Xsubopt[:,[0]] = x0
@@ -155,3 +139,169 @@ if latexOut:
 else:
     plt.show()
 
+
+
+# Get the convex programming solution
+import cvxpy
+
+allUcvx = [cvxpy.Variable((1,1), f"u{i}") for i in range(Nsteps-1)]
+
+# Get all states as a function of U
+allXcvx = [dxBase]
+for i in range(1,Nsteps):
+    allXcvx.append( Ad@allXcvx[-1] + Bd@allUcvx[i-1] )
+
+# Construct the cost
+costcvx = 0.
+# control cost
+for i in range(Nsteps-1):
+    costcvx += cvxpy.quad_form(allUcvx[i], R)#U[:,[i]].T@R@U[:,[i]]
+# state cost
+for ax in allXcvx:
+    costcvx += cvxpy.quad_form(ax, Q)#ax.T@Q@ax
+
+# Construct contraints
+allCstrcvx = []
+for i in range(Nsteps-1):
+    allCstrcvx.append( -uAbs<=allUcvx[i][0,0] )
+    allCstrcvx.append( -uAbs<=-allUcvx[i][0,0] )
+
+probcvx = cvxpy.Problem(cvxpy.Minimize(costcvx), allCstrcvx)
+probcvx.solve()
+
+assert probcvx.status == 'optimal'
+probcvxoldvalue = probcvx.value
+
+Xcvx = np.hstack( [allXcvx[0]] + [aXcvx.value for aXcvx in allXcvx[1:]] )
+Ucvx = np.hstack( [aU.value for aU in allUcvx] + [allUcvx[-1].value] ) #Repeat last control input for completeness
+
+# Plot compared to constrained lqr
+ffcvx,aacvx = plt.subplots(3,1, figsize=beamerFigSize)
+#aa[0].set_title(f"Cost opt: {float(J):.3e}; Cost subopt: {float(Jsubopt):.3e}")
+for i in range(2):
+    aacvx[i].step(traj.trajDiscrete_.xref.t, np.array(traj.trajDiscrete_.xref.x[i,:]).squeeze(), where='post', color='b')
+    aacvx[i].step(lqr_DynProg.t, Xsubopt[i,:], '-r', where='post')
+    aacvx[i].step(lqr_DynProg.t, Xcvx[i, :], '-g', where='post')
+    aacvx[i].set_ylabel(xxLabel[i])
+    aacvx[i].tick_params( axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labeltop=False,
+                       labelleft=False, labelright=False)
+aacvx[-1].plot([lqr_DynProg.t[0], lqr_DynProg.t[-1]], [uAbs, uAbs], '--g')
+aacvx[-1].plot([lqr_DynProg.t[0], lqr_DynProg.t[-1]], [-uAbs, -uAbs], '--g')
+aacvx[-1].step(lqr_DynProg.t, np.array(Usubopttot[0,:]).squeeze(), '-r', where='post')
+aacvx[-1].step(lqr_DynProg.t, np.array(Ucvx[0,:]).squeeze(), '-g', where='post')
+#aa[-1].step(lqr_DynProg.t, np.array(Udelta[0,:]).squeeze(), '-k', where='post')
+#aa[-1].step(lqr_DynProg.t, np.array(Usuboptdelta[0,:]).squeeze(), '-r', where='post')
+aacvx[-1].set_ylabel('u')
+aacvx[-1].set_xlabel('t')
+aacvx[-1].tick_params( axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labeltop=False,
+                       labelleft=False, labelright=False)
+
+plt.tight_layout()
+
+aacvx[1].text(14., .1, f"J:{float(Jsubopt):.3e}", color='red')
+aacvx[1].text(6., .1, f"J:{float(probcvx.value):.3e}", color='green')
+if latexOut:
+    ffcvx.savefig(fname = '../img/pgf/cvx_comparison_text.pgf', format='pgf')
+else:
+    plt.show()
+
+# Add state contraints
+for ax in allXcvx[1:]:
+    allCstrcvx.append(xMin <= ax[0, 0])
+    allCstrcvx.append(-xMax <= -ax[0, 0])
+    allCstrcvx.append( xdotMin <= ax[1,0] )
+    allCstrcvx.append( -xdotMax <= -ax[1,0] )
+
+for ax in allXcvx[stepFinish:]:
+    allCstrcvx.append(xMinFinish <= ax[0, 0])
+    allCstrcvx.append(-xMaxFinish <= -ax[0, 0])
+
+
+
+probcvx = cvxpy.Problem(cvxpy.Minimize(costcvx), allCstrcvx)
+probcvx.solve()
+
+assert probcvx.status == 'optimal'
+
+Xcvxc = np.hstack( [allXcvx[0]] + [aXcvx.value for aXcvx in allXcvx[1:]] )
+Ucvxc = np.hstack( [aU.value for aU in allUcvx] + [allUcvx[-1].value] ) #Repeat last control input for completeness
+
+
+# Plot compared to constrained lqr
+ffcvxc,aacvxc = plt.subplots(3,1, figsize=beamerFigSize)
+#aa[0].set_title(f"Cost opt: {float(J):.3e}; Cost subopt: {float(Jsubopt):.3e}")
+for i in range(2):
+    aacvxc[i].step(traj.trajDiscrete_.xref.t, np.array(traj.trajDiscrete_.xref.x[i,:]).squeeze(), where='post', color='b')
+    if i == 0:
+        aacvxc[i].plot([tFinish, lqr_DynProg.t[-1]], [xMaxFinish, xMaxFinish], '--g')
+        aacvxc[i].plot([tFinish, lqr_DynProg.t[-1]], [xMinFinish, xMinFinish], '--g')
+
+    #    aacvxc[i].plot([lqr_DynProg.t[0], lqr_DynProg.t[-1]], [xMax, xMax], '--g')
+    #    aacvxc[i].plot([lqr_DynProg.t[0], lqr_DynProg.t[-1]], [xMin, -xMin], '--g')
+    #if i == 1:
+    #    aacvxc[i].plot([lqr_DynProg.t[0], lqr_DynProg.t[-1]], [xdotMax, xdotMax], '--g')
+    #    aacvxc[i].plot([lqr_DynProg.t[0], lqr_DynProg.t[-1]], [xdotMin, -xdotMin], '--g')
+    aacvxc[i].step(lqr_DynProg.t, Xcvx[i, :], '-g', where='post')
+    aacvxc[i].step(lqr_DynProg.t, Xcvxc[i, :], '-m', where='post')
+    aacvxc[i].set_ylabel(xxLabel[i])
+    aacvxc[i].tick_params( axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labeltop=False,
+                       labelleft=False, labelright=False)
+aacvxc[-1].plot([lqr_DynProg.t[0], lqr_DynProg.t[-1]], [uAbs, uAbs], '--g')
+aacvxc[-1].plot([lqr_DynProg.t[0], lqr_DynProg.t[-1]], [-uAbs, -uAbs], '--g')
+aacvxc[-1].step(lqr_DynProg.t, np.array(Ucvx[0,:]).squeeze(), '-g', where='post')
+aacvxc[-1].step(lqr_DynProg.t, np.array(Ucvxc[0,:]).squeeze(), '-m', where='post')
+#aa[-1].step(lqr_DynProg.t, np.array(Udelta[0,:]).squeeze(), '-k', where='post')
+#aa[-1].step(lqr_DynProg.t, np.array(Usuboptdelta[0,:]).squeeze(), '-r', where='post')
+aacvxc[-1].set_ylabel('u')
+aacvxc[-1].set_xlabel('t')
+aacvxc[-1].tick_params( axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labeltop=False,
+                       labelleft=False, labelright=False)
+
+plt.tight_layout()
+
+aacvxc[1].text(14., .1, f"J:{float(probcvx.value):.3e}", color='magenta')
+aacvxc[1].text(6., .1, f"J:{float(probcvxoldvalue):.3e}", color='green')
+if latexOut:
+    ffcvxc.savefig(fname = '../img/pgf/cvx_stateCstr_comparison_text.pgf', format='pgf')
+else:
+    plt.show()
+
+
+# Plot compared to constrained lqr
+ffcvxcdet,aacvxcdet = plt.subplots(3,1, figsize=beamerFigSize)
+#aa[0].set_title(f"Cost opt: {float(J):.3e}; Cost subopt: {float(Jsubopt):.3e}")
+for i in range(2):
+    aacvxcdet[i].step(traj.trajDiscrete_.xref.t[stepFinish:], np.array(traj.trajDiscrete_.xref.x[i,stepFinish:]).squeeze(), where='post', color='b')
+    if i == 0:
+        aacvxcdet[i].plot([tFinish, lqr_DynProg.t[-1]], [xMaxFinish, xMaxFinish], '--g')
+        aacvxcdet[i].plot([tFinish, lqr_DynProg.t[-1]], [xMinFinish, xMinFinish], '--g')
+
+    #    aacvxcdet[i].plot([lqr_DynProg.t[0], lqr_DynProg.t[-1]], [xMax, xMax], '--g')
+    #    aacvxcdet[i].plot([lqr_DynProg.t[0], lqr_DynProg.t[-1]], [xMin, -xMin], '--g')
+    #if i == 1:
+    #    aacvxcdet[i].plot([lqr_DynProg.t[0], lqr_DynProg.t[-1]], [xdotMax, xdotMax], '--g')
+    #    aacvxcdet[i].plot([lqr_DynProg.t[0], lqr_DynProg.t[-1]], [xdotMin, -xdotMin], '--g')
+    aacvxcdet[i].step(lqr_DynProg.t[stepFinish:], Xcvx[i, stepFinish:], '-g', where='post')
+    aacvxcdet[i].step(lqr_DynProg.t[stepFinish:], Xcvxc[i, stepFinish:], '-m', where='post')
+    aacvxcdet[i].set_ylabel(xxLabel[i])
+    aacvxcdet[i].tick_params( axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labeltop=False,
+                       labelleft=False, labelright=False)
+aacvxcdet[-1].plot([tFinish, lqr_DynProg.t[-1]], [uAbs, uAbs], '--g')
+aacvxcdet[-1].plot([tFinish, lqr_DynProg.t[-1]], [-uAbs, -uAbs], '--g')
+aacvxcdet[-1].step(lqr_DynProg.t[stepFinish:], np.array(Ucvx[0,stepFinish:]).squeeze(), '-g', where='post')
+aacvxcdet[-1].step(lqr_DynProg.t[stepFinish:], np.array(Ucvxc[0,stepFinish:]).squeeze(), '-m', where='post')
+#aa[-1].step(lqr_DynProg.t, np.array(Udelta[0,:]).squeeze(), '-k', where='post')
+#aa[-1].step(lqr_DynProg.t, np.array(Usuboptdelta[0,:]).squeeze(), '-r', where='post')
+aacvxcdet[-1].set_ylabel('u')
+aacvxcdet[-1].set_xlabel('t')
+aacvxcdet[-1].tick_params( axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labeltop=False,
+                       labelleft=False, labelright=False)
+
+plt.tight_layout()
+
+#aacvxcdet[1].text(14., .1, f"J:{float(probcvx.value):.3e}", color='magenta')
+#aacvxcdet[1].text(6., .1, f"J:{float(probcvxoldvalue):.3e}", color='green')
+if latexOut:
+    ffcvxcdet.savefig(fname = '../img/pgf/cvx_stateCstr_det_comparison_text.pgf', format='pgf')
+else:
+    plt.show()
