@@ -125,7 +125,7 @@
 \def\input@path{{./img/pdf_tex/}{./img/pgf/}}
 \makeatother
 
-\pgfplotsset{compat=1.15}
+%\pgfplotsset{compat=1.15} #overleaf
 
 \begin{document}
 \begin{frame}
@@ -733,9 +733,46 @@ Q = \begin{bmatrix} 1. & 0. \\ 0. & 1. \end{bmatrix} \ \ \ \ R = \begin{bmatrix}
 
 \begin{frame}{Linking control theory and computer science}
 
-Formal methods 
+Formal methods developed in computer science are used to 
+\begin{itemize}
+	\item Proof that an algorithm verifies certain properties: Model checking
+	\item Perform automated code-generation from specification: Synthesis
+\end{itemize}
 
+\only<2>{
+	How does it work?
+\begin{itemize}
+	\item Translate properties and algorithm into a specific structure, e.g finite automata
+	\item Perform (exhaustive) search over the reachable states
+\end{itemize}
+}
 \end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
 
