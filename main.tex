@@ -107,6 +107,8 @@
 \beamertemplatenavigationsymbolsempty
 
 \usepackage{pgfplots}
+\usepackage{color}
+\usepackage{framed,color}
 
 \renewcommand{\circled}[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,innersep=1pt] (char) {#1};}} 
 
@@ -226,7 +228,7 @@ Actuated mechanism (re-)programmable in two or more axes with a degree of autono
 \begin{center}
 \begin{minipage}{0.49\linewidth}
 \begin{center}
-\includegraphics[width=0.8\linewidth]{SRI_Shakey_with_callouts.jpg}
+\includegraphics[width=0.7\linewidth]{SRI_Shakey_with_callouts.jpg}
 \end{center}
 \end{minipage}
 \hfill
@@ -247,7 +249,7 @@ Actuated mechanism (re-)programmable in two or more axes with a degree of autono
 \begin{center}
 \begin{minipage}{0.49\linewidth}
 \begin{center}
-\includegraphics[width=0.8\linewidth]{SRI_Shakey_with_callouts.jpg}
+\includegraphics[width=0.7\linewidth]{SRI_Shakey_with_callouts.jpg}
 \end{center}
 \end{minipage}
 \hfill
@@ -390,10 +392,10 @@ A robot from a control theoretic perspective looks like this:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Trajectory generation - Dubins' car}
 \begin{center}
-Simplified car dynamics:\\
-constant forward velocity, minimal turning radius
 \only<1>{
 \begin{figure}
+Simplified car dynamics:\\
+constant forward velocity, minimal turning radius
 	\def\svgwidth{\linewidth}
 	\input{dubins.pdf_tex}
 \end{figure}
@@ -405,7 +407,8 @@ It can be shown that the ideal (shortest) trajectory between two configurations 
 	\def\svgwidth{.6\linewidth}
 	\input{dubins_2_0.pdf_tex}
 \end{figure}
-By allowing for more expressive behaviour (obstacles), the problem becomes (drastically) more complicated.
+By allowing for more expressive behaviour (obstacles), \\
+the problem becomes (drastically) more complicated.
 }
 %https://en.wikipedia.org/wiki/Dubins_path
 %Johnson, H. H "An application of the maximum principle to the geometry of plane curves", Proceedings of the American Mathematical Society, 44(2):432- 435, 1974.
@@ -487,7 +490,8 @@ Possible methods to obtain the Linear Quadratic Regulator (LQR):\\[6pt]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}{Optimal control - Dynamic Programming}
 \begin{center}
-A solution can be found using dynamic programming and iterating from end to start.\\[4pt]
+A solution can be found using dynamic programming\\
+and backward iteration.\\[4pt]
 
 The final cost is ``fixed'': $J(\x_N) = \xT_N.Q.\x_N$ \\[4pt]
 \visible<2->{
@@ -513,7 +517,9 @@ $\uv_{N-1} = \argmin{\uv}\ \tp{\uv}.R.\uv + J(A.\x_{i-1} + B.\uv)$\\[2pt]
 \visible<1->{
 	and after some linear algebra one can find an optimal linear feedback matrix:\\[4pt]
 	$\uv_{N-1} = K_{N-1}.\x$ \\[2pt]
-	So we have established a time-dependent linear control law that is optimal in the sense of the cost function.
+}
+\visible<2->{
+	This allows us to establish a time-dependent linear control law that is optimal with respect to the cost function.
 }
 
 \end{center}
@@ -525,13 +531,13 @@ $\uv_{N-1} = \argmin{\uv}\ \tp{\uv}.R.\uv + J(A.\x_{i-1} + B.\uv)$\\[2pt]
 \begin{center}
 \only<1>{
 Mass-spring-damper model
-\begin{equation}
-\xd = \begin{pmatrix} \dot{x} \\ \ddot{x} \end{pmatrix} = \begin{bmatrix} 0. & 1. \\ -0.5 & -0.15 \end{bmatrix} . \begin{pmatrix} x \\ \dot{x} \end{pmatrix}
-\end{equation}
+\begin{equation*}
+\xd = \begin{pmatrix} \dot{x} \\ \ddot{x} \end{pmatrix} = \begin{bmatrix} 0. & 1. \\ -0.5 & -0.15 \end{bmatrix} . \begin{pmatrix} x \\ \dot{x} \end{pmatrix}  +  \begin{pmatrix} 0. \\ 1. \end{pmatrix} .\uv
+\end{equation*}
 with 
-\begin{equation}
+\begin{equation*}
 Q = \begin{bmatrix} 1. & 0. \\ 0. & 1. \end{bmatrix} \ \ \ \ R = \begin{bmatrix} 1. \end{bmatrix}
-\end{equation}
+\end{equation*}
 }
 \only<2>{
 \input{linear.pgf}
@@ -718,11 +724,11 @@ Q = \begin{bmatrix} 1. & 0. \\ 0. & 1. \end{bmatrix} \ \ \ \ R = \begin{bmatrix}
 
 \begin{itemize}
     \item Control theory provides the means to drive a robot from state \textbf{A} to state \textbf{B}
-    \item Task planning allows to compute a sequence of state in order to accomplish a task
+    \item Task planning allows to compute a sequence of states in order to accomplish a task
 \end{itemize}
 
 \only<2->{
-    The complicated part is to couple them is such a way that
+    The complicated part is to couple them in such a way that
     \begin{itemize}
         \item The sequence of states is feasible for the actual robot
         \item Other (safety) constraints are respected
@@ -737,8 +743,8 @@ Q = \begin{bmatrix} 1. & 0. \\ 0. & 1. \end{bmatrix} \ \ \ \ R = \begin{bmatrix}
 \begin{center}
 Formal methods developed in computer science are used to 
 \begin{itemize}
-	\item Proof that an algorithm verifies certain properties: Model checking
-	\item Perform automated code-generation from specification: Synthesis
+	\item Proof that an algorithm verifies certain properties: \\ Model checking
+	\item Perform automated code-generation from specification: \\ Synthesis
 \end{itemize}
 
 \only<2>{
@@ -753,17 +759,67 @@ Formal methods developed in computer science are used to
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\begin{frame}{Linking control theory and model checking}
+\begin{frame}{Providing ``atomic'' certificates }
 \begin{center}
 Use control theoretic proofs to construct ``atomic'' certificates
 
+\begin{figure}
+	\def\svgwidth{0.85\linewidth}
+	\input{funnel_ex2.pdf_tex}
+\end{figure}
 
+\only<2>{
+	\begin{equation}
+		\forall \x\in\FS(t), \forall t'\ge t \colon\ \x(t')\in\FS(t')	
+	\end{equation}
+}
 
 \end{center}
 \end{frame}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}{Switching \& safety}
+\begin{center}
+
+\begin{figure}
+	\def\svgwidth{0.95\linewidth}
+	{\larger[1]
+	\input{automateSimple1.pdf_tex}
+	}
+\end{figure}
+
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Translation to timed automata}
+\begin{center}
+
+\begin{figure}
+	\def\svgwidth{1.1\linewidth}
+	{
+	\input{tempAutIntro4.pdf_tex}
+	}
+\end{figure}
+
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{}
+\begin{center}
+\textbf{\large Thank you for your attention!}
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{icub.png}
+\end{figure}
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 

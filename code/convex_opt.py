@@ -34,7 +34,7 @@ aacvx.tick_params( axis='both', which='both', bottom=False, top=False, left=Fals
 
 ffncvx,aancvx = plt.subplots(1,1,figsize=beamerFigSizeSmall)
 #aancvx.contour(x,y,z,cmap=plt.get_cmap('viridis'), levels=21)
-aacvx.contour(x,y,z,colors=zColor, levels=zLevel)
+aancvx.contour(x,y,z,colors=zColor, levels=zLevel)
 
 ncvxCstr = np.array([[-1.5, -1.5, 0.25, 0.0, 2., 2., -1.5],[2, -0.2, 0.2, -1.5, -1.5, 2.25, 2.]]) + np.array([[-0.1],[0.5]])
 aancvx.plot(ncvxCstr[0,:], ncvxCstr[1,:], '-r', linewidth=2.)

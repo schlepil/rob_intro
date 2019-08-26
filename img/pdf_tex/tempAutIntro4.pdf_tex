@@ -1,4 +1,4 @@
-%% Creator: Inkscape inkscape 0.92.3, www.inkscape.org
+%% Creator: Inkscape inkscape 0.92.4, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
 %% Accompanies image file 'tempAutIntro4.pdf' (pdf, eps, ps)
 %%
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{6063.76708984bp}%
+    \setlength{\unitlength}{5537.53808594bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,25 +50,25 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.42852026)%
+  \begin{picture}(1,0.40857388)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{tempAutIntro4.pdf}}%
-    \put(0.9225001,0.13112529){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$t\in I_1$\end{tabular}}}}%
-    \put(0.66493594,0.07909308){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger \scaa $\FS_0$}\end{tabular}}}}%
-    \put(0.02079405,0.35738159){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger \scaa $\FS_0$}\end{tabular}}}}%
-    \put(0.01512571,0.2205337){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger \scab $\FS_1$}\end{tabular}}}}%
-    \put(0.56348996,0.1022463){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\relscale{0.7} $t\in\left[a_{1f},b_{1f}\right]$}\end{tabular}}}}%
-    \put(0.79584616,0.13112529){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\relscale{0.7} {$t\in\left[a_{01},b_{01}\right]$}}\end{tabular}}}}%
-    \put(0.79584616,0.07422997){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\relscale{0.7} $t\in\left[a_{10},b_{10}\right]$}\end{tabular}}}}%
-    \put(0.66449217,0.13112529){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$t\in I_0$\end{tabular}}}}%
-    \put(0.92163728,0.07905998){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger \scab $\FS_1$}\end{tabular}}}}%
-    \put(0.6883894,0.27374912){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger logical specification}\end{tabular}}}}%
-    \put(0.6883894,0.18642716){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger timed automaton}\end{tabular}}}}%
-    \put(0.44064957,0.08491801){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}target\end{tabular}}}}%
-    \put(0.44062843,0.35657544){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}target\end{tabular}}}}%
-    \put(0.25800362,0.41348474){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger discretized system }\end{tabular}}}}%
-    \put(0.27133392,0.15175227){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}obstacle\end{tabular}}}}%
+    \put(0.91513538,0.14358605){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$t\in I_1$\end{tabular}}}}%
+    \put(0.63309503,0.08660924){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger \scaa $\FS_0$}\end{tabular}}}}%
+    \put(0.01296657,0.34618342){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger \scaa $\FS_0$}\end{tabular}}}}%
+    \put(0.00474475,0.22616431){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger \scab $\FS_1$}\end{tabular}}}}%
+    \put(0.52038343,0.11304622){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\relscale{0.7} $t\in\left[a_{1f},b_{1f}\right]$}\end{tabular}}}}%
+    \put(0.77644558,0.14358605){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\relscale{0.7} {$t\in\left[a_{01},b_{01}\right]$}}\end{tabular}}}}%
+    \put(0.77644558,0.08128399){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\relscale{0.7} $t\in\left[a_{10},b_{10}\right]$}\end{tabular}}}}%
+    \put(0.63260909,0.14358605){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$t\in I_0$\end{tabular}}}}%
+    \put(0.91419056,0.086573){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger \scab $\FS_1$}\end{tabular}}}}%
+    \put(0.65877726,0.29976334){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger logical specification}\end{tabular}}}}%
+    \put(0.65877726,0.20414322){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger timed automaton}\end{tabular}}}}%
+    \put(0.38749485,0.09163332){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}target\end{tabular}}}}%
+    \put(0.23346588,0.39538734){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\larger discretized system }\end{tabular}}}}%
+    \put(0.25815907,0.16042363){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}obstacle\end{tabular}}}}%
     \put(0,0){\includegraphics[width=\unitlength,page=2]{tempAutIntro4.pdf}}%
+    \put(0.3943441,0.3430424){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}{\textcolor{cfGreenSl}{target}}\end{tabular}}}}%
   \end{picture}%
 \endgroup%

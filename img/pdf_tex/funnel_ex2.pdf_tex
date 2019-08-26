@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{2031.75915527bp}%
+    \setlength{\unitlength}{2030.23406982bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,14 +50,14 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.29692415)%
+  \begin{picture}(1,0.29138412)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{funnel_ex2.pdf}}%
-    \put(0.08921112,0.28070989){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\FS(t)$\end{tabular}}}}%
-    \put(0.45990418,0.15325522){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\FS(t')$\end{tabular}}}}%
-    \put(0.76897153,0.15527173){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\FS(t')$\end{tabular}}}}%
-    \put(0.02092248,0.03516138){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\x^r$\end{tabular}}}}%
-    \put(0.1359961,0.22113895){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\x$\end{tabular}}}}%
+    \put(0.08927817,0.28689341){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\FS(t)$\end{tabular}}}}%
+    \put(0.46024969,0.159343){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\FS(t')$\end{tabular}}}}%
+    \put(0.7695492,0.16136102){\color[rgb]{0,0,0}\makebox(0,0)[t]{\lineheight{1.25}\smash{\begin{tabular}[t]{c}$\FS(t'')$\end{tabular}}}}%
+    \put(0.02093823,0.04116045){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\x^r$\end{tabular}}}}%
+    \put(0.13609829,0.22727772){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\x$\end{tabular}}}}%
   \end{picture}%
 \endgroup%

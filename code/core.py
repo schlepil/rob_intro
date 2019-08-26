@@ -1,5 +1,8 @@
 import matplotlib
-latexOut = True
+if 0:
+    latexOut = False
+else:
+    latexOut = True
 if latexOut:
     matplotlib.use("pgf")
     pgf_with_custom_preamble = {
