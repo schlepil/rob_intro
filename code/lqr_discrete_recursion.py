@@ -142,12 +142,14 @@ else:
 
 
 
-# Get the convex programming solution
+# Get the solution based on convex optimization
 import cvxpy
 
+ # List of all decision variables
+ # One list entry is the control vector for one time-step
 allUcvx = [cvxpy.Variable((1,1), f"u{i}") for i in range(Nsteps-1)]
 
-# Get all states as a function of U
+# Get all states as a (affine) function of U
 allXcvx = [dxBase]
 for i in range(1,Nsteps):
     allXcvx.append( Ad@allXcvx[-1] + Bd@allUcvx[i-1] )
@@ -162,18 +164,20 @@ for ax in allXcvx:
     costcvx += cvxpy.quad_form(ax, Q)#ax.T@Q@ax
 
 # Construct contraints
+# Constraints are just a list of equality and inequality constraints
 allCstrcvx = []
 for i in range(Nsteps-1):
     allCstrcvx.append( -uAbs<=allUcvx[i][0,0] )
     allCstrcvx.append( -uAbs<=-allUcvx[i][0,0] )
 
+# Solve
 probcvx = cvxpy.Problem(cvxpy.Minimize(costcvx), allCstrcvx)
 probcvx.solve()
 
-assert probcvx.status == 'optimal'
+assert probcvx.status == 'optimal' #Check if problem was actually solved. If constraints are infeasible, this flag will be set to "primal|dual infeasible"
 probcvxoldvalue = probcvx.value
 
-Xcvx = np.hstack( [allXcvx[0]] + [aXcvx.value for aXcvx in allXcvx[1:]] )
+Xcvx = np.hstack( [allXcvx[0]] + [aXcvx.value for aXcvx in allXcvx[1:]] ) # Evaluate the solution for the states
 Ucvx = np.hstack( [aU.value for aU in allUcvx] + [allUcvx[-1].value] ) #Repeat last control input for completeness
 
 # Plot compared to constrained lqr
@@ -206,7 +210,7 @@ if latexOut:
 else:
     plt.show()
 
-# Add state contraints
+# Add state contraints in addition to the input constraints
 for ax in allXcvx[1:]:
     allCstrcvx.append(xMin <= ax[0, 0])
     allCstrcvx.append(-xMax <= -ax[0, 0])
@@ -217,8 +221,7 @@ for ax in allXcvx[stepFinish:]:
     allCstrcvx.append(xMinFinish <= ax[0, 0])
     allCstrcvx.append(-xMaxFinish <= -ax[0, 0])
 
-
-
+# Solve
 probcvx = cvxpy.Problem(cvxpy.Minimize(costcvx), allCstrcvx)
 probcvx.solve()
 

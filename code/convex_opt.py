@@ -1,5 +1,7 @@
 from core import *
 
+from os import path
+
 # Get a convex quadratic multivariate polynomial
 P = np.array([[1., 0.8],[0.8, 2.]])*0.2
 
@@ -50,7 +52,7 @@ aancvx.tick_params( axis='both', which='both', bottom=False, top=False, left=Fal
 
 
 if latexOut:
-    ffcvx.savefig(fname = '../img/pgf/opt_cvxCstr.pgf', format='pgf')
-    ffncvx.savefig(fname = '../img/pgf/opt_ncvxCstr.pgf', format='pgf')
+    ffcvx.savefig(fname = path.join(imageFolder, 'opt_cvxCstr.pgf'), format='pgf')
+    ffncvx.savefig(fname = path.join(imageFolder, 'opt_ncvxCstr.pgf'), format='pgf')
 else:
     plt.show()
