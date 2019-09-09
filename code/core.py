@@ -1,5 +1,5 @@
 import matplotlib
-if 0:
+if 1:
     latexOut = False
 else:
     latexOut = True
@@ -22,6 +22,8 @@ if latexOut:
     matplotlib.rcParams.update(pgf_with_custom_preamble)
 else:
     matplotlib.use("Qt5Agg")
+
+imageFolder = "../img/pgf"
 
 beamerFigSize = (5*.8,3.5*.8)
 beamerFigSizeSmall = (5*.55,3.5*.55)
@@ -49,6 +51,8 @@ class variableStruct:
     
     def __repr__(self):
         return self.__str__()
+
+
 
 class leftNeighboor():
     """

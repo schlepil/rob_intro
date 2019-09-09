@@ -1,38 +1,44 @@
+from os import path
+
 from trajectories import getTraj1
 
 from definitions import *
 
-
 # Compute control and cost-matrices
 # Safe all (naive implementation)
+
+# In this case, the final cost and the intermediate cost matrices are
+# identitical.
+
+# Initialize
 lqr_DynProg = variableStruct()
-lqr_DynProg.t = np.array([dt*i for i in range(Nsteps)])
-lqr_DynProg.P =  [Q.copy()]
-lqr_DynProg.K = []
+lqr_DynProg.t = np.array([dt*i for i in range(Nsteps)]) # The different time-steps
+lqr_DynProg.P =  [Q.copy()] # current cost == final cost
+lqr_DynProg.K = [] # Directly store the linear gain matrix
 
 P = lqr_DynProg.P[-1]
 for _ in range(Nsteps):
-    # Compute new K
+    # Compute new K based on last go-to-cost
     K = -sp_linalg.inv(R+Bd.T*P*Bd)*(Bd.T*P*Ad)
     lqr_DynProg.K.append( K )
-    # Compute new P
+    # Compute new P based on current optimal feedback gain
     P = Q + Ad.T*P*Ad - Ad.T*P*Bd*sp_linalg.inv(R + Bd.T*P*Bd)*Bd.T*P*Ad
     lqr_DynProg.P.append( P )
+
 # Reverse the order
+# The solution is computed starting at the final time-point -> reverse
 lqr_DynProg.K.reverse()
 lqr_DynProg.P.reverse()
-lqr_DynProg.getK = lambda t: lqr_DynProg.K[np.flatnonzero(lqr_DynProg.t<=t)[0]]
 
 traj = getTraj1(lqr_DynProg.t, A, B, omega=0.) # If omega is non-zero the time delay affects convergence
 
-# Define cost =
+# Define cost
 def costFun(t,x,u=np.matrix(np.zeros((1,1)))):
     deltax = x-traj.xref_d(t)
     deltau = u-traj.uref_d(t)
     return np_multidot([deltax.T, Q, deltax]) + np_multidot([deltau.T, R, deltau])
 
 # Simulate
-# Discrete
 x0 = traj.xref_c(0.) + dxBase
 X = np.matrix(np.zeros((2,Nsteps)))
 X[:,[0]] = x0
@@ -40,7 +46,7 @@ Udelta = np.matrix(np.zeros((1, Nsteps)))
 Utot = Udelta.copy()
 J = 0
 for i in range(1,Nsteps):
-    #compute control
+    #compute control using the linear control law
     Udelta[:, i - 1] = lqr_DynProg.K[i - 1] * (X[:, [i - 1]] - traj.xref_d(lqr_DynProg.t[i - 1]))
     Utot[:, i-1] = Udelta[:, i - 1] + traj.uref_d(lqr_DynProg.t[i-1])
     #update cost
@@ -63,8 +69,7 @@ aa[-2].step(lqr_DynProg.t, np.array(Utot[0,:]).squeeze(), '-k', where='post')
 aa[-1].step(lqr_DynProg.t, np.array(Udelta[0,:]).squeeze(), '-k', where='post')
 
 
-# What if we limit
-
+# What if we limit the maximal input
 Xsubopt = np.matrix(np.zeros((2,Nsteps)))
 Xsubopt[:,[0]] = x0
 Usuboptdelta = np.matrix(np.zeros((1, Nsteps)))
@@ -73,7 +78,7 @@ Jsubopt = 0
 for i in range(1,Nsteps):
     #compute control
     Usuboptdelta[:, i - 1] = lqr_DynProg.K[i - 1] * (Xsubopt[:, [i - 1]] - traj.xref_d(lqr_DynProg.t[i - 1]))
-    Usubopttot[:, i-1] = np.minimum(np.maximum(-uAbs, Usuboptdelta[:, i - 1] + traj.uref_d(lqr_DynProg.t[i-1])), uAbs)
+    Usubopttot[:, i-1] = np.minimum(np.maximum(-uAbs, Usuboptdelta[:, i - 1] + traj.uref_d(lqr_DynProg.t[i-1])), uAbs) # Impose upper and lower bound
     #update cost
     Jsubopt += costFun((i-1)*dt, Xsubopt[:,[i-1]], Usubopttot[:, i-1])
     #update state
@@ -85,7 +90,6 @@ Xsubopt = np.array(Xsubopt)
 plt.tick_params( axis='x', which='both', bottom=False, top=False,  labelbottom=False )
 
 ffl,aal = plt.subplots(3,1, figsize=beamerFigSize)
-#aa[0].set_title(f"Cost opt: {float(J):.3e}; Cost subopt: {float(Jsubopt):.3e}")
 xxLabel = [r"$x$", r"$\dot{x}$"]
 for i in range(2):
     aal[i].step(traj.trajDiscrete_.xref.t, np.array(traj.trajDiscrete_.xref.x[i,:]).squeeze(), where='post', color='b')
@@ -103,11 +107,10 @@ aal[-1].tick_params( axis='both', which='both', bottom=False, top=False, left=Fa
 
 plt.tight_layout()
 if latexOut:
-    ffl.savefig(fname = '../img/pgf/linear.pgf', format='pgf')
+    ffl.savefig(fname = path.join(imageFolder, 'linear.pgf'), format='pgf')
 
 
 fflc,aalc = plt.subplots(3,1, figsize=beamerFigSize)
-#aa[0].set_title(f"Cost opt: {float(J):.3e}; Cost subopt: {float(Jsubopt):.3e}")
 for i in range(2):
     aalc[i].step(traj.trajDiscrete_.xref.t, np.array(traj.trajDiscrete_.xref.x[i,:]).squeeze(), where='post', color='b')
     aalc[i].step(lqr_DynProg.t, X[i,:], '-k', where='post')
@@ -119,8 +122,6 @@ aalc[-1].plot([lqr_DynProg.t[0], lqr_DynProg.t[-1]], [uAbs, uAbs], '--g')
 aalc[-1].plot([lqr_DynProg.t[0], lqr_DynProg.t[-1]], [-uAbs, -uAbs], '--g')
 aalc[-1].step(lqr_DynProg.t, np.array(Utot[0,:]).squeeze(), '-k', where='post')
 aalc[-1].step(lqr_DynProg.t, np.array(Usubopttot[0,:]).squeeze(), '-r', where='post')
-#aa[-1].step(lqr_DynProg.t, np.array(Udelta[0,:]).squeeze(), '-k', where='post')
-#aa[-1].step(lqr_DynProg.t, np.array(Usuboptdelta[0,:]).squeeze(), '-r', where='post')
 aalc[-1].set_ylabel('u')
 aalc[-1].set_xlabel('t')
 aalc[-1].tick_params( axis='both', which='both', bottom=False, top=False, left=False, right=False, labelbottom=False, labeltop=False,
@@ -128,14 +129,14 @@ aalc[-1].tick_params( axis='both', which='both', bottom=False, top=False, left=F
 
 plt.tight_layout()
 if latexOut:
-    fflc.savefig(fname = '../img/pgf/linear_comparison.pgf', format='pgf')
+    fflc.savefig(fname = path.join(imageFolder, 'linear_comparison.pgf'), format='pgf')
 else:
     plt.show()
 
 aalc[1].text(6., .1, f"J:{float(J):.3e}", color='black')
 aalc[1].text(14., .1, f"J:{float(Jsubopt):.3e}", color='red')
 if latexOut:
-    fflc.savefig(fname = '../img/pgf/linear_comparison_text.pgf', format='pgf')
+    fflc.savefig(fname = path.join(imageFolder, 'linear_comparison_text.pgf'), format='pgf')
 else:
     plt.show()
 
@@ -201,7 +202,7 @@ plt.tight_layout()
 aacvx[1].text(14., .1, f"J:{float(Jsubopt):.3e}", color='red')
 aacvx[1].text(6., .1, f"J:{float(probcvx.value):.3e}", color='green')
 if latexOut:
-    ffcvx.savefig(fname = '../img/pgf/cvx_comparison_text.pgf', format='pgf')
+    ffcvx.savefig(fname = path.join(imageFolder, 'cvx_comparison_text.pgf'), format='pgf')
 else:
     plt.show()
 
@@ -262,7 +263,7 @@ plt.tight_layout()
 aacvxc[1].text(14., .1, f"J:{float(probcvx.value):.3e}", color='magenta')
 aacvxc[1].text(6., .1, f"J:{float(probcvxoldvalue):.3e}", color='green')
 if latexOut:
-    ffcvxc.savefig(fname = '../img/pgf/cvx_stateCstr_comparison_text.pgf', format='pgf')
+    ffcvxc.savefig(fname = path.join(imageFolder, 'cvx_stateCstr_comparison_text.pgf'), format='pgf')
 else:
     plt.show()
 
@@ -302,6 +303,6 @@ plt.tight_layout()
 #aacvxcdet[1].text(14., .1, f"J:{float(probcvx.value):.3e}", color='magenta')
 #aacvxcdet[1].text(6., .1, f"J:{float(probcvxoldvalue):.3e}", color='green')
 if latexOut:
-    ffcvxcdet.savefig(fname = '../img/pgf/cvx_stateCstr_det_comparison_text.pgf', format='pgf')
+    ffcvxcdet.savefig(fname = path.join(imageFolder, 'cvx_stateCstr_det_comparison_text.pgf'), format='pgf')
 else:
     plt.show()
